@@ -36,6 +36,30 @@ app.get("/job_history", async(req,res)=>{
     }
 })
 
+app.get('/jobs',async(req, res)=>{
+  try{
+      const result = await pool.query('SELECT * FROM jobs');
+      res.json(result.rows);
+  }
+  catch(err){
+      res.status(500).json({Error: err.message});
+  }
+})
+
+
+app.get('/Count_E',async(req, res)=>{
+  try{
+      const result = await pool.query('SELECT count(employee_id) from employees');
+      res.json(result.rows);
+  }
+  catch(err){
+      res.status(500).json({Error: err.message});
+  }
+})
+
+
+
+
 
 app.get("/regions_countries_locations", async (req, res) => {
   try {
